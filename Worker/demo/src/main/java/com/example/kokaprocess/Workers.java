@@ -1,6 +1,7 @@
 package com.example.kokaprocess;
 
-import com.example.kokaprocess.KokaProcess;
+import com.example.kokaprocess.OrderInformation;
+import io.camunda.common.auth.Product;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.client.api.worker.JobClient;
 import io.camunda.zeebe.spring.client.EnableZeebeClient;
@@ -53,8 +54,32 @@ public class Workers {
     @JobWorker(type = "updateStock")
     public void updateStock(final JobClient client, final ActivatedJob job) {
         try {
-            // Perform the task
-            System.out.println("Updating stock for job: " + job.getKey());
+            // Extract variables from the job
+            Map<String, Object> variables = job.getVariablesAsMap();
+            Integer selectProduct = (Integer) variables.get("selectProduct");
+            int quantityPurchased = (Integer) variables.get("quantityProduct");
+
+            // Fetch the product name using the product ID
+            String productName = OrderInformation.getProductMap().get(selectProduct);
+            if (productName == null) {
+                throw new RuntimeException("Invalid product: " + selectProduct);
+            }
+
+            // Fetch the product from the database
+            /*
+            Product product = productRepository.findByName(productName);
+            if (product == null) {
+                throw new RuntimeException("Product not found: " + productName);
+            }
+
+            // Update the product quantity
+            int newQuantity = product.getQuantity() - quantityPurchased;
+            if (newQuantity < 0) {
+                throw new RuntimeException("Insufficient stock for product: " + productName);
+            }
+            product.setQuantity(newQuantity);
+            productRepository.save(product);
+            */
 
             // Complete the job
             client.newCompleteCommand(job.getKey()).send().join();
