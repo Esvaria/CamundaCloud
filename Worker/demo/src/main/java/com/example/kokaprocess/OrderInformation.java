@@ -6,8 +6,10 @@ import java.util.*;
 
 public class OrderInformation {
 
-    @JsonProperty("itemList")
-    private List<String> itemList = Arrays.asList("selfLamp", "standingDesk", "secretLabChair");
-    @JsonProperty("itemQuantity")
-    private int itemQuantity;
+    @JsonProperty("productList")
+    private List<String> productList = Arrays.asList("selfLamp", "standingDesk", "secretLabChair");
+    @JsonProperty("selectProduct")
+    private String selectProduct;
+    @JsonProperty("quantityProduct")
+    private int quantityProduct;
 }

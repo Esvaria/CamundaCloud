@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ShippingInformation {
 
-    @JsonProperty("streetAddress")
+    @JsonProperty("streetName")
     private String streetAddress;
     @JsonProperty("streetNumber")
     private int streetNumber;
-    @JsonProperty("NPA")
+    @JsonProperty("cityNPA")
     private int NPA;
-    @JsonProperty("City")
+    @JsonProperty("cityName")
     private String City;
 }
