@@ -36,9 +36,6 @@ public class KokaProcess {
         return true;
     }
 
-
-
-
     private HttpResponse<String> get(String uri) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

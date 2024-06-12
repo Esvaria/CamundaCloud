@@ -9,10 +9,10 @@ public class OrderInformation {
     @JsonProperty("selectProduct")
     private String selectProduct;
     @JsonProperty("quantityProduct")
-    private int quantityProduct;
+    private float quantityProduct;
 
     @JsonProperty("productMap")
-    private Map<Integer, String> productMap;
+    private static Map<Integer, String> productMap;
 
     public void ProductMap() {
         productMap = new HashMap<>();

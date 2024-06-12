@@ -1,16 +1,11 @@
 package com.example.kokaprocess;
 
-import com.example.kokaprocess.OrderInformation;
-import io.camunda.common.auth.Product;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.client.api.worker.JobClient;
-import io.camunda.zeebe.spring.client.EnableZeebeClient;
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.Map;
 
 @SpringBootApplication
@@ -56,7 +51,7 @@ public class Workers {
         try {
             // Extract variables from the job
             Map<String, Object> variables = job.getVariablesAsMap();
-            Integer selectProduct = (Integer) variables.get("selectProduct");
+            String selectProduct = (String) variables.get("selectProduct");
             int quantityPurchased = (Integer) variables.get("quantityProduct");
 
             // Fetch the product name using the product ID
@@ -98,7 +93,7 @@ public class Workers {
         try {
             // Extract variables from the job
             Map<String, Object> variables = job.getVariablesAsMap();
-            // just like verify payment we need all info to put inside the json
+            // just like verify payment we need all info to put inside the json'
 
 
             // Complete the job with the updated variables
