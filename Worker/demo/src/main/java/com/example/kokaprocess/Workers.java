@@ -67,5 +67,28 @@ public class Workers {
                     .join();
         }
     }
+
+    @JobWorker(type = "generateReceipt")
+    public void generateReceipt(final JobClient client, final ActivatedJob job) {
+        try {
+            // Extract variables from the job
+            Map<String, Object> variables = job.getVariablesAsMap();
+            // just like verify payment we need all info to put inside the json
+
+
+            // Complete the job with the updated variables
+            client.newCompleteCommand(job.getKey())
+                    .variables(variables)
+                    .send()
+                    .join();
+        } catch (Exception e) {
+            // Handle failure
+            client.newFailCommand(job.getKey())
+                    .retries(job.getRetries() - 1)
+                    .errorMessage(e.getMessage())
+                    .send()
+                    .join();
+        }
+    }
 }
 
