@@ -30,13 +30,6 @@ import java.nio.file.Files;
 @Component
 public class KokaProcess {
 
-    private static String apiKey;
-
-    @Value("${api-ninjas.key}")
-    public void setApiKey(String key) {
-        apiKey = key;
-    }
-
     public KokaProcess() {
     }
 
@@ -187,22 +180,4 @@ public class KokaProcess {
         createDatabase();
     }
 
-    private HttpResponse<String> get(String uri) throws Exception {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .header("X-Api-Key", apiKey)
-                .header("Content-Type", "application/json")
-                .uri(URI.create(uri))
-                .build();
-
-        System.out.println("Fetching URI: " + uri);
-        HttpResponse<String> response = client
-                .send(request, HttpResponse.BodyHandlers.ofString());
-
-        System.out.println("Got status code: " + response.statusCode());
-        System.out.println("=== Body:");
-        System.out.println(response.body());
-        System.out.println("=========");
-        return response;
-    }
 }

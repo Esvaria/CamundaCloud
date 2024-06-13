@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:signavio="http://www.signavio.com" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="sid-ee1f613a-670f-4379-ac28-0830b7aa4082" targetNamespace="http://www.signavio.com" expressionLanguage="http://www.w3.org/TR/XPath" exporter="Camunda Web Modeler" exporterVersion="b1a091a" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd" camunda:diagramRelationId="5d500ff2-2f60-457f-8780-1db08949fb56">
+  <error id="sid-ddfbb899-f89f-4fc4-a7dc-5dce3b1a2a60" />
+  <collaboration id="sid-071ff8e3-dbf5-4061-a7cd-8b98ef0a7515">
+    <extensionElements>
+      <signavio:signavioDiagramMetaData metaKey="prozessreifegrad" metaValue="" />
+      <signavio:signavioDiagramMetaData metaKey="iso9000ff" metaValue="" />
+      <signavio:signavioDiagramMetaData metaKey="processgoal" metaValue="" />
+      <signavio:signavioDiagramMetaData metaKey="meta-prozessverantwortlicher" metaValue="" />
+      <signavio:signavioDiagramMetaData metaKey="revisionid" metaValue="708c25fdd8e3476bbe6dd1c604292bda" />
+    </extensionElements>
+    <participant id="sid-5D5AEE04-B511-43F0-B720-57E4D8F1913C" name="koka" processRef="kokaProcess">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+    </participant>
+  </collaboration>
+  <process id="kokaProcess" name="kokaprocess" processType="None" isClosed="false" isExecutable="true">
+    <laneSet id="sid-af023472-43c4-4ff5-b413-c754acd879e8">
+      <lane id="sid-43F4BFEA-98F5-4914-A425-820BE956B8B0" name="customerService">
+        <extensionElements>
+          <signavio:signavioMetaData metaKey="bgcolor" metaValue="" />
+          <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        </extensionElements>
+        <flowNodeRef>Gateway_11wi3g3</flowNodeRef>
+        <flowNodeRef>Verify_payment</flowNodeRef>
+        <flowNodeRef>Validate_order</flowNodeRef>
+        <flowNodeRef>sid-C8970E3D-EA7F-447B-9ECB-670F7ED484A2</flowNodeRef>
+        <flowNodeRef>Send_receipt</flowNodeRef>
+        <flowNodeRef>Event_06vs29t</flowNodeRef>
+        <flowNodeRef>Event_0xcaezb</flowNodeRef>
+        <flowNodeRef>cancel_order</flowNodeRef>
+        <flowNodeRef>sid-52F4A1A3-33CA-4B47-8F61-1514EC9D26E1</flowNodeRef>
+      </lane>
+      <lane id="sid-6FDB5932-A2CC-4863-94FE-D5E835217B6E" name="orderProcessing">
+        <extensionElements>
+          <signavio:signavioMetaData metaKey="bgcolor" metaValue="" />
+          <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        </extensionElements>
+        <flowNodeRef>Event_14ehp1h</flowNodeRef>
+        <flowNodeRef>Enter_order_info</flowNodeRef>
+      </lane>
+      <lane id="sid-D07C35FA-47B8-4641-A491-662BE40F04D2" name="logistics">
+        <extensionElements>
+          <signavio:signavioMetaData metaKey="bgcolor" metaValue="" />
+          <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        </extensionElements>
+        <flowNodeRef>sid-7A508F2E-7920-4CBF-8A1C-8D1FB9420EBC</flowNodeRef>
+        <flowNodeRef>sid-9B08B896-68EE-484F-8F6B-46FBC70AFC97</flowNodeRef>
+        <flowNodeRef>Prepare_order</flowNodeRef>
+        <flowNodeRef>Updatestock</flowNodeRef>
+        <flowNodeRef>sid-77ED8202-97A6-44F4-AED4-9B546A55C5B8</flowNodeRef>
+        <flowNodeRef>Generate_receipt</flowNodeRef>
+        <flowNodeRef>API</flowNodeRef>
+      </lane>
+    </laneSet>
+    <parallelGateway id="sid-7A508F2E-7920-4CBF-8A1C-8D1FB9420EBC" name="" gatewayDirection="Converging">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+      <incoming>sid-25F8DFF9-4695-4B1C-B05F-CD426F75C65D</incoming>
+      <incoming>Flow_05ipf0e</incoming>
+      <outgoing>Flow_14on44p</outgoing>
+    </parallelGateway>
+    <parallelGateway id="sid-9B08B896-68EE-484F-8F6B-46FBC70AFC97" name="" gatewayDirection="Diverging">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+      <incoming>Flow_0ti82e9</incoming>
+      <outgoing>sid-EC3F9C6A-271D-4490-97A3-A7DD08ABBABE</outgoing>
+      <outgoing>sid-C194B3BE-6B84-4D83-B4B8-FC9E46D9CFEB</outgoing>
+    </parallelGateway>
+    <exclusiveGateway id="Gateway_11wi3g3" name="checkPayment" default="Flow_0v4kdz1">
+      <incoming>Flow_003dejb</incoming>
+      <outgoing>Flow_0v4kdz1</outgoing>
+      <outgoing>Flow_1bnbtpm</outgoing>
+    </exclusiveGateway>
+    <serviceTask id="Verify_payment" name="Verify payment" implementation="##WebService">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" metaValue="" />
+        <signavio:signavioMetaData metaKey="wirdkonsultiert" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="meta-risikomanagement" metaValue="" />
+        <signavio:signavioMetaData metaKey="wirdinformiert" metaValue="[]" />
+        <zeebe:taskDefinition type="verifyPayment" retries="0" />
+      </extensionElements>
+      <incoming>Flow_0dzkh35</incoming>
+      <outgoing>Flow_003dejb</outgoing>
+    </serviceTask>
+    <sequenceFlow id="sid-68533A14-EFC4-4151-9DC4-7D4912703407" name="" sourceRef="Send_receipt" targetRef="sid-C8970E3D-EA7F-447B-9ECB-670F7ED484A2">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_03rpli9" sourceRef="Generate_receipt" targetRef="sid-77ED8202-97A6-44F4-AED4-9B546A55C5B8" />
+    <sequenceFlow id="sid-EC3F9C6A-271D-4490-97A3-A7DD08ABBABE" name="" isImmediate="true" sourceRef="sid-9B08B896-68EE-484F-8F6B-46FBC70AFC97" targetRef="Prepare_order">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sid-C194B3BE-6B84-4D83-B4B8-FC9E46D9CFEB" name="" isImmediate="true" sourceRef="sid-9B08B896-68EE-484F-8F6B-46FBC70AFC97" targetRef="Updatestock">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sid-25F8DFF9-4695-4B1C-B05F-CD426F75C65D" name="" isImmediate="true" sourceRef="Updatestock" targetRef="sid-7A508F2E-7920-4CBF-8A1C-8D1FB9420EBC">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_003dejb" sourceRef="Verify_payment" targetRef="Gateway_11wi3g3" />
+    <sequenceFlow id="Flow_0v4kdz1" name="wrong payment" sourceRef="Gateway_11wi3g3" targetRef="cancel_order" />
+    <sequenceFlow id="Flow_0dzkh35" sourceRef="Enter_order_info" targetRef="Verify_payment" />
+    <sequenceFlow id="sid-4F0373BB-C2CB-4D38-ABC1-496C7BB5D9BE" name="" sourceRef="cancel_order" targetRef="sid-52F4A1A3-33CA-4B47-8F61-1514EC9D26E1">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_1a3i166" sourceRef="Event_14ehp1h" targetRef="Enter_order_info" />
+    <userTask id="Validate_order" name="Validate order">
+      <extensionElements>
+        <zeebe:formDefinition formId="Form_0gkbepl" />
+        <zeebe:assignmentDefinition assignee="marie-esther.mabillard@students.hevs.ch" />
+      </extensionElements>
+      <incoming>Flow_1bnbtpm</incoming>
+      <outgoing>Flow_0ti82e9</outgoing>
+    </userTask>
+    <userTask id="Prepare_order" name="Prepare order">
+      <extensionElements>
+        <zeebe:formDefinition formId="prepare-order-1cs86oa" />
+        <zeebe:assignmentDefinition assignee="=user" />
+      </extensionElements>
+      <incoming>sid-EC3F9C6A-271D-4490-97A3-A7DD08ABBABE</incoming>
+      <outgoing>Flow_05ipf0e</outgoing>
+    </userTask>
+    <serviceTask id="Updatestock" name="Update stock" implementation="##WebService">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioMetaData metaKey="erteiltfreigabe" metaValue="" />
+        <signavio:signavioMetaData metaKey="wirdkonsultiert" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+        <signavio:signavioMetaData metaKey="meta-risikomanagement" metaValue="" />
+        <signavio:signavioMetaData metaKey="wirdinformiert" metaValue="[]" />
+        <zeebe:taskDefinition type="updateStock" retries="1" />
+      </extensionElements>
+      <incoming>sid-C194B3BE-6B84-4D83-B4B8-FC9E46D9CFEB</incoming>
+      <outgoing>sid-25F8DFF9-4695-4B1C-B05F-CD426F75C65D</outgoing>
+    </serviceTask>
+    <sequenceFlow id="Flow_1tmoghd" sourceRef="Generate_receipt" targetRef="Event_06vs29t" />
+    <endEvent id="sid-C8970E3D-EA7F-447B-9ECB-670F7ED484A2" name="order completed">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioMetaData metaKey="nachfolgerprozesse" metaValue="[]" />
+      </extensionElements>
+      <incoming>sid-68533A14-EFC4-4151-9DC4-7D4912703407</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_1bnbtpm" name="payment success" sourceRef="Gateway_11wi3g3" targetRef="Validate_order">
+      <conditionExpression xsi:type="tFormalExpression">=isPaymentValid=true</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_05q8bn1" sourceRef="Event_06vs29t" targetRef="Send_receipt" />
+    <endEvent id="sid-77ED8202-97A6-44F4-AED4-9B546A55C5B8" name="order completed">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioMetaData metaKey="nachfolgerprozesse" metaValue="[]" />
+      </extensionElements>
+      <incoming>Flow_03rpli9</incoming>
+    </endEvent>
+    <serviceTask id="Send_receipt" name="Send receipt" implementation="##WebService" zeebe:modelerTemplate="io.camunda.connectors.SendGrid.v2" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wLjI4NTcwNiA1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMUgwLjI4NTcwNlY1LjQwODQ3WiIgZmlsbD0id2hpdGUiLz4KICAgIDxwYXRoIGQ9Ik0wLjI4NTcwNiA1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMUgwLjI4NTcwNlY1LjQwODQ3WiIgZmlsbD0iIzk5RTFGNCIvPgogICAgPHBhdGggZD0iTTUuNDM4MzcgMTAuNTYxMUwxMC41NjExIDEwLjU2MTZWMTUuNjg0NEg1LjQzODM3VjEwLjU2MTFaIiBmaWxsPSJ3aGl0ZSIvPgogICAgPHBhdGggZD0iTTUuNDM4MzcgMTAuNTYxMUwxMC41NjExIDEwLjU2MTZWMTUuNjg0NEg1LjQzODM3VjEwLjU2MTFaIiBmaWxsPSIjOTlFMUY0Ii8+CiAgICA8cGF0aCBkPSJNMC4yODU3MDYgMTUuNjg0Nkw1LjQzODM3IDE1LjY4NDRWMTUuNzE0M0gwLjI4NTcwNlYxNS42ODQ2Wk0wLjI4NTcwNiAxMC41NjE5SDUuNDM4MzdWMTUuNjg0NEwwLjI4NTcwNiAxNS42ODQ2VjEwLjU2MTlaIiBmaWxsPSIjMUE4MkUyIi8+CiAgICA8cGF0aCBkPSJNNS40MzgzNyAwLjI4NTcwNkgxMC41NjExVjUuNDA4NDdINS40MzgzN1YwLjI4NTcwNlpNMTAuNTYxNiA1LjQzODM3SDE1LjcxNDNWMTAuNTYxMUgxMC41NjE2VjUuNDM4MzdaIiBmaWxsPSIjMDBCM0UzIi8+CiAgICA8cGF0aCBkPSJNNS40MzgzNyAxMC41NjExTDEwLjU2MTEgMTAuNTYxNlY1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMVoiIGZpbGw9IiMwMDlERDkiLz4KICAgIDxwYXRoIGQ9Ik0xMC41NjExIDAuMjg1NzA2SDE1LjcxNDNWNS40MDg0N0gxMC41NjExVjAuMjg1NzA2WiIgZmlsbD0iIzFBODJFMiIvPgogICAgPHBhdGggZD0iTTEwLjU2MTEgNS40MDg0N0gxNS43MTQzVjUuNDM4MzdIMTAuNTYxNkwxMC41NjExIDUuNDA4NDdaIiBmaWxsPSIjMUE4MkUyIi8+Cjwvc3ZnPg==">
+      <extensionElements>
+        <zeebe:taskDefinition type="io.camunda:sendgrid:1" retries="3" />
+        <zeebe:ioMapping type="io.camunda:sendgrid:1">
+          <zeebe:input source="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" target="apiKey" />
+          <zeebe:input source="KokaOrderProcess" target="from.name" />
+          <zeebe:input source="esther.vannier@gmail.com" target="from.email" />
+          <zeebe:input source="Tony De Carvalho" target="to.name" />
+          <zeebe:input source="tony.decarvalho5@gmail.com" target="to.email" />
+          <zeebe:input source="mail" target="unMappedFieldNotUseInModel.mailType" />
+          <zeebe:input source="Order receipt" target="content.subject" />
+          <zeebe:input source="text/plain" target="content.type" />
+          <zeebe:input source="The order receipt is ready! Contact an administrator to have it." target="content.value" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </extensionElements>
+      <incoming>Flow_05q8bn1</incoming>
+      <outgoing>sid-68533A14-EFC4-4151-9DC4-7D4912703407</outgoing>
+    </serviceTask>
+    <serviceTask id="Generate_receipt" name="Generate receipt">
+      <extensionElements>
+        <zeebe:taskDefinition type="generateReceipt" />
+      </extensionElements>
+      <incoming>Flow_05yyn62</incoming>
+      <outgoing>Flow_03rpli9</outgoing>
+      <outgoing>Flow_1tmoghd</outgoing>
+    </serviceTask>
+    <intermediateCatchEvent id="Event_06vs29t">
+      <incoming>Flow_1tmoghd</incoming>
+      <outgoing>Flow_05q8bn1</outgoing>
+      <timerEventDefinition id="TimerEventDefinition_0s9j6q6">
+        <timeDuration xsi:type="tFormalExpression">PT5S</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <serviceTask id="API" name="call API" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="7" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+      <extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="GET" target="method" />
+          <zeebe:input source="http://worldtimeapi.org/api/timezone/Europe/London" target="url" />
+          <zeebe:input source="20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="20" target="readTimeoutInSeconds" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="datetime" />
+          <zeebe:header key="resultExpression" value="=datetime.datetime" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </extensionElements>
+      <incoming>Flow_14on44p</incoming>
+      <outgoing>Flow_05yyn62</outgoing>
+    </serviceTask>
+    <sequenceFlow id="Flow_05yyn62" sourceRef="API" targetRef="Generate_receipt" />
+    <sequenceFlow id="Flow_14on44p" sourceRef="sid-7A508F2E-7920-4CBF-8A1C-8D1FB9420EBC" targetRef="API" />
+    <sequenceFlow id="Flow_05ipf0e" sourceRef="Prepare_order" targetRef="sid-7A508F2E-7920-4CBF-8A1C-8D1FB9420EBC" />
+    <sequenceFlow id="Flow_0ti82e9" sourceRef="Validate_order" targetRef="sid-9B08B896-68EE-484F-8F6B-46FBC70AFC97" />
+    <sequenceFlow id="Flow_0p98w5g" sourceRef="Event_0xcaezb" targetRef="cancel_order" />
+    <boundaryEvent id="Event_0xcaezb" attachedToRef="Validate_order">
+      <outgoing>Flow_0p98w5g</outgoing>
+      <timerEventDefinition id="TimerEventDefinition_1th8k3p">
+        <timeDuration xsi:type="tFormalExpression">PT30S</timeDuration>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <startEvent id="Event_14ehp1h" name="start">
+      <extensionElements>
+        <zeebe:formDefinition formId="start-007ldtp" />
+      </extensionElements>
+      <outgoing>Flow_1a3i166</outgoing>
+    </startEvent>
+    <userTask id="Enter_order_info" name="Enter order info">
+      <extensionElements>
+        <zeebe:formDefinition formId="Form_0us09s9" />
+        <zeebe:userTask />
+        <zeebe:assignmentDefinition assignee="=user" />
+      </extensionElements>
+      <incoming>Flow_1a3i166</incoming>
+      <outgoing>Flow_0dzkh35</outgoing>
+    </userTask>
+    <serviceTask id="cancel_order" name="cancel order" zeebe:modelerTemplate="io.camunda.connectors.Slack.v1" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI3IiBoZWlnaHQ9IjEyNyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMjcuMiA4MGMwIDcuMy01LjkgMTMuMi0xMy4yIDEzLjJDNi43IDkzLjIuOCA4Ny4zLjggODBjMC03LjMgNS45LTEzLjIgMTMuMi0xMy4yaDEzLjJWODB6bTYuNiAwYzAtNy4zIDUuOS0xMy4yIDEzLjItMTMuMiA3LjMgMCAxMy4yIDUuOSAxMy4yIDEzLjJ2MzNjMCA3LjMtNS45IDEzLjItMTMuMiAxMy4yLTcuMyAwLTEzLjItNS45LTEzLjItMTMuMlY4MHoiIGZpbGw9IiNFMDFFNUEiLz4KICA8cGF0aCBkPSJNNDcgMjdjLTcuMyAwLTEzLjItNS45LTEzLjItMTMuMkMzMy44IDYuNSAzOS43LjYgNDcgLjZjNy4zIDAgMTMuMiA1LjkgMTMuMiAxMy4yVjI3SDQ3em0wIDYuN2M3LjMgMCAxMy4yIDUuOSAxMy4yIDEzLjIgMCA3LjMtNS45IDEzLjItMTMuMiAxMy4ySDEzLjlDNi42IDYwLjEuNyA1NC4yLjcgNDYuOWMwLTcuMyA1LjktMTMuMiAxMy4yLTEzLjJINDd6IiBmaWxsPSIjMzZDNUYwIi8+CiAgPHBhdGggZD0iTTk5LjkgNDYuOWMwLTcuMyA1LjktMTMuMiAxMy4yLTEzLjIgNy4zIDAgMTMuMiA1LjkgMTMuMiAxMy4yIDAgNy4zLTUuOSAxMy4yLTEzLjIgMTMuMkg5OS45VjQ2Ljl6bS02LjYgMGMwIDcuMy01LjkgMTMuMi0xMy4yIDEzLjItNy4zIDAtMTMuMi01LjktMTMuMi0xMy4yVjEzLjhDNjYuOSA2LjUgNzIuOC42IDgwLjEuNmM3LjMgMCAxMy4yIDUuOSAxMy4yIDEzLjJ2MzMuMXoiIGZpbGw9IiMyRUI2N0QiLz4KICA8cGF0aCBkPSJNODAuMSA5OS44YzcuMyAwIDEzLjIgNS45IDEzLjIgMTMuMiAwIDcuMy01LjkgMTMuMi0xMy4yIDEzLjItNy4zIDAtMTMuMi01LjktMTMuMi0xMy4yVjk5LjhoMTMuMnptMC02LjZjLTcuMyAwLTEzLjItNS45LTEzLjItMTMuMiAwLTcuMyA1LjktMTMuMiAxMy4yLTEzLjJoMzMuMWM3LjMgMCAxMy4yIDUuOSAxMy4yIDEzLjIgMCA3LjMtNS45IDEzLjItMTMuMiAxMy4ySDgwLjF6IiBmaWxsPSIjRUNCMjJFIi8+Cjwvc3ZnPgo=">
+      <extensionElements>
+        <zeebe:taskDefinition type="io.camunda:slack:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="xoxb-7237109592981-7239960632915-xHR2wGdKWqZxNqO8TkTkxdAp" target="token" />
+          <zeebe:input source="chat.postMessage" target="method" />
+          <zeebe:input source="plainText" target="data.messageType" />
+          <zeebe:input source="The order was cancelled. Check with an admin for more information." target="data.text" />
+          <zeebe:input source="koka-process" target="data.channel" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </extensionElements>
+      <incoming>Flow_0v4kdz1</incoming>
+      <incoming>Flow_0p98w5g</incoming>
+      <outgoing>sid-4F0373BB-C2CB-4D38-ABC1-496C7BB5D9BE</outgoing>
+    </serviceTask>
+    <endEvent id="sid-52F4A1A3-33CA-4B47-8F61-1514EC9D26E1" name="order canceled">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioMetaData metaKey="nachfolgerprozesse" metaValue="[]" />
+      </extensionElements>
+      <incoming>sid-4F0373BB-C2CB-4D38-ABC1-496C7BB5D9BE</incoming>
+    </endEvent>
+  </process>
+  <message id="Message_2ks95nd" name="Message_2ks95nd" />
+  <bpmndi:BPMNDiagram id="sid-16025ba4-c76c-4bdf-8960-4869817268bc">
+    <bpmndi:BPMNPlane id="sid-ff9e1a23-a985-49f2-81fa-0faf1db0fe4d" bpmnElement="sid-071ff8e3-dbf5-4061-a7cd-8b98ef0a7515">
+      <bpmndi:BPMNShape id="sid-5D5AEE04-B511-43F0-B720-57E4D8F1913C_gui" bpmnElement="sid-5D5AEE04-B511-43F0-B720-57E4D8F1913C" isHorizontal="true">
+        <omgdc:Bounds x="130" y="40" width="1430" height="560" />
+        <bpmndi:BPMNLabel labelStyle="sid-8833f536-812a-42a8-b0af-05a57adead16" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-D07C35FA-47B8-4641-A491-662BE40F04D2_gui" bpmnElement="sid-D07C35FA-47B8-4641-A491-662BE40F04D2" isHorizontal="true">
+        <omgdc:Bounds x="160" y="385" width="1400" height="215" />
+        <bpmndi:BPMNLabel labelStyle="sid-8833f536-812a-42a8-b0af-05a57adead16" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-6FDB5932-A2CC-4863-94FE-D5E835217B6E_gui" bpmnElement="sid-6FDB5932-A2CC-4863-94FE-D5E835217B6E" isHorizontal="true">
+        <omgdc:Bounds x="160" y="40" width="1400" height="135" />
+        <bpmndi:BPMNLabel labelStyle="sid-8833f536-812a-42a8-b0af-05a57adead16" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-43F4BFEA-98F5-4914-A425-820BE956B8B0_gui" bpmnElement="sid-43F4BFEA-98F5-4914-A425-820BE956B8B0" isHorizontal="true">
+        <omgdc:Bounds x="160" y="175" width="1400" height="210" />
+        <bpmndi:BPMNLabel labelStyle="sid-8833f536-812a-42a8-b0af-05a57adead16" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-7A508F2E-7920-4CBF-8A1C-8D1FB9420EBC_gui" bpmnElement="sid-7A508F2E-7920-4CBF-8A1C-8D1FB9420EBC">
+        <omgdc:Bounds x="1005" y="462" width="40" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-9B08B896-68EE-484F-8F6B-46FBC70AFC97_gui" bpmnElement="sid-9B08B896-68EE-484F-8F6B-46FBC70AFC97">
+        <omgdc:Bounds x="770" y="462" width="40" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_11wi3g3_di" bpmnElement="Gateway_11wi3g3" isMarkerVisible="true">
+        <omgdc:Bounds x="575" y="264" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="614" y="263" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-EFB6244C-E258-4787-AB1E-3E3CCAD2F7BF_gui" bpmnElement="Verify_payment">
+        <omgdc:Bounds x="420" y="249" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-8833f536-812a-42a8-b0af-05a57adead16">
+          <omgdc:Bounds x="429.1142883300781" y="281" width="81.77142333984375" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0einw88_di" bpmnElement="Validate_order">
+        <omgdc:Bounds x="690" y="292" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00tf9fa_di" bpmnElement="Prepare_order">
+        <omgdc:Bounds x="860" y="401" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-A5D445C5-C5B3-42BB-872B-883DA606ED2E_gui" bpmnElement="Updatestock">
+        <omgdc:Bounds x="860" y="500" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-8833f536-812a-42a8-b0af-05a57adead16">
+          <omgdc:Bounds x="874.1285705566406" y="532" width="71.74285888671875" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-C8970E3D-EA7F-447B-9ECB-670F7ED484A2_gui" bpmnElement="sid-C8970E3D-EA7F-447B-9ECB-670F7ED484A2">
+        <omgdc:Bounds x="1476" y="275" width="28" height="28" />
+        <bpmndi:BPMNLabel labelStyle="sid-d00d3e40-8020-4d24-aa87-fdf40af67099">
+          <omgdc:Bounds x="1450" y="313" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-77ED8202-97A6-44F4-AED4-9B546A55C5B8_gui" bpmnElement="sid-77ED8202-97A6-44F4-AED4-9B546A55C5B8">
+        <omgdc:Bounds x="1476" y="468" width="28" height="28" />
+        <bpmndi:BPMNLabel labelStyle="sid-d00d3e40-8020-4d24-aa87-fdf40af67099">
+          <omgdc:Bounds x="1450" y="498" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0doff48_di" bpmnElement="Send_receipt">
+        <omgdc:Bounds x="1340" y="249" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06y7p6e_di" bpmnElement="Generate_receipt">
+        <omgdc:Bounds x="1230" y="442" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1udce2k_di" bpmnElement="Event_06vs29t">
+        <omgdc:Bounds x="1262" y="271" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1umb91e_di" bpmnElement="API">
+        <omgdc:Bounds x="1090" y="442" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14ehp1h_di" bpmnElement="Event_14ehp1h">
+        <omgdc:Bounds x="212" y="92" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="219" y="135" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0n95dd2_di" bpmnElement="Enter_order_info">
+        <omgdc:Bounds x="300" y="70" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12me619_di" bpmnElement="cancel_order">
+        <omgdc:Bounds x="800" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-52F4A1A3-33CA-4B47-8F61-1514EC9D26E1_gui" bpmnElement="sid-52F4A1A3-33CA-4B47-8F61-1514EC9D26E1">
+        <omgdc:Bounds x="976" y="216" width="28" height="28" />
+        <bpmndi:BPMNLabel labelStyle="sid-d00d3e40-8020-4d24-aa87-fdf40af67099">
+          <omgdc:Bounds x="953" y="254" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0cbamhx_di" bpmnElement="Event_0xcaezb">
+        <omgdc:Bounds x="772" y="292" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="sid-68533A14-EFC4-4151-9DC4-7D4912703407_gui" bpmnElement="sid-68533A14-EFC4-4151-9DC4-7D4912703407">
+        <omgdi:waypoint x="1440" y="289" />
+        <omgdi:waypoint x="1476" y="289" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03rpli9_di" bpmnElement="Flow_03rpli9">
+        <omgdi:waypoint x="1330" y="482" />
+        <omgdi:waypoint x="1476" y="482" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-EC3F9C6A-271D-4490-97A3-A7DD08ABBABE_gui" bpmnElement="sid-EC3F9C6A-271D-4490-97A3-A7DD08ABBABE">
+        <omgdi:waypoint x="790" y="462" />
+        <omgdi:waypoint x="790" y="441" />
+        <omgdi:waypoint x="860" y="441" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-C194B3BE-6B84-4D83-B4B8-FC9E46D9CFEB_gui" bpmnElement="sid-C194B3BE-6B84-4D83-B4B8-FC9E46D9CFEB">
+        <omgdi:waypoint x="790" y="502" />
+        <omgdi:waypoint x="790" y="540" />
+        <omgdi:waypoint x="860" y="540" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-25F8DFF9-4695-4B1C-B05F-CD426F75C65D_gui" bpmnElement="sid-25F8DFF9-4695-4B1C-B05F-CD426F75C65D">
+        <omgdi:waypoint x="960" y="540" />
+        <omgdi:waypoint x="1024.9950054918618" y="540" />
+        <omgdi:waypoint x="1025" y="502" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_003dejb_di" bpmnElement="Flow_003dejb">
+        <omgdi:waypoint x="520" y="289" />
+        <omgdi:waypoint x="575" y="289" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v4kdz1_di" bpmnElement="Flow_0v4kdz1">
+        <omgdi:waypoint x="600" y="264" />
+        <omgdi:waypoint x="600" y="230" />
+        <omgdi:waypoint x="800" y="230" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="655" y="208" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dzkh35_di" bpmnElement="Flow_0dzkh35">
+        <omgdi:waypoint x="350" y="150" />
+        <omgdi:waypoint x="350" y="288" />
+        <omgdi:waypoint x="420" y="289" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-4F0373BB-C2CB-4D38-ABC1-496C7BB5D9BE_gui" bpmnElement="sid-4F0373BB-C2CB-4D38-ABC1-496C7BB5D9BE">
+        <omgdi:waypoint x="900" y="230" />
+        <omgdi:waypoint x="976" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a3i166_di" bpmnElement="Flow_1a3i166">
+        <omgdi:waypoint x="248" y="110" />
+        <omgdi:waypoint x="300" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tmoghd_di" bpmnElement="Flow_1tmoghd">
+        <omgdi:waypoint x="1280" y="442" />
+        <omgdi:waypoint x="1280" y="307" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bnbtpm_di" bpmnElement="Flow_1bnbtpm">
+        <omgdi:waypoint x="600" y="314" />
+        <omgdi:waypoint x="600" y="332" />
+        <omgdi:waypoint x="690" y="332" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="597" y="343" width="85" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05q8bn1_di" bpmnElement="Flow_05q8bn1">
+        <omgdi:waypoint x="1298" y="289" />
+        <omgdi:waypoint x="1340" y="289" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05yyn62_di" bpmnElement="Flow_05yyn62">
+        <omgdi:waypoint x="1190" y="482" />
+        <omgdi:waypoint x="1230" y="482" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14on44p_di" bpmnElement="Flow_14on44p">
+        <omgdi:waypoint x="1045" y="482" />
+        <omgdi:waypoint x="1090" y="482" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05ipf0e_di" bpmnElement="Flow_05ipf0e">
+        <omgdi:waypoint x="960" y="441" />
+        <omgdi:waypoint x="1025" y="441" />
+        <omgdi:waypoint x="1025" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ti82e9_di" bpmnElement="Flow_0ti82e9">
+        <omgdi:waypoint x="740" y="372" />
+        <omgdi:waypoint x="740" y="482" />
+        <omgdi:waypoint x="770" y="482" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0p98w5g_di" bpmnElement="Flow_0p98w5g">
+        <omgdi:waypoint x="808" y="310" />
+        <omgdi:waypoint x="850" y="310" />
+        <omgdi:waypoint x="850" y="270" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNLabelStyle id="sid-d00d3e40-8020-4d24-aa87-fdf40af67099">
+      <omgdc:Font name="Arial" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" />
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="sid-8833f536-812a-42a8-b0af-05a57adead16">
+      <omgdc:Font name="Arial" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" />
+    </bpmndi:BPMNLabelStyle>
+  </bpmndi:BPMNDiagram>
+</definitions>
