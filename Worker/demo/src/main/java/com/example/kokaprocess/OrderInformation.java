@@ -14,13 +14,11 @@ public class OrderInformation {
     @JsonProperty("productMap")
     private static Map<Integer, String> productMap;
 
-    public void ProductMap() {
+    public static Map<Integer, String> getProductMap() {
         productMap = new HashMap<>();
         productMap.put(1, "selfLamp");
         productMap.put(2, "standingDesk");
         productMap.put(3, "secretLabChair");
-    }
-    public static Map<Integer, String> getProductMap() {
         return productMap;
     }
 }

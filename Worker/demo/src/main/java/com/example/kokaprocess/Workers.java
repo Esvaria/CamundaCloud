@@ -14,6 +14,7 @@ public class Workers {
     public static void main(String[] args) {
         SpringApplication.run(Workers.class, args);
     }
+
     @JobWorker(type = "verifyPayment")
     public void verifyPayment(final JobClient client, final ActivatedJob job) {
         try {
@@ -49,32 +50,21 @@ public class Workers {
     @JobWorker(type = "updateStock")
     public void updateStock(final JobClient client, final ActivatedJob job) {
         try {
+            KokaProcess.createDatabase();
+
             // Extract variables from the job
             Map<String, Object> variables = job.getVariablesAsMap();
             String selectProduct = (String) variables.get("selectProduct");
             int quantityPurchased = (Integer) variables.get("quantityProduct");
 
-            // Fetch the product name using the product ID
-            String productName = OrderInformation.getProductMap().get(selectProduct);
-            if (productName == null) {
-                throw new RuntimeException("Invalid product: " + selectProduct);
-            }
+            // Fetch the product's current quantity from the database
+            int currentQuantity = KokaProcess.getProductQuantity(selectProduct);
 
-            // Fetch the product from the database
-            /*
-            Product product = productRepository.findByName(productName);
-            if (product == null) {
-                throw new RuntimeException("Product not found: " + productName);
-            }
+            // Calculate new quantity after deduction
+            int newQuantity = currentQuantity - quantityPurchased;
 
-            // Update the product quantity
-            int newQuantity = product.getQuantity() - quantityPurchased;
-            if (newQuantity < 0) {
-                throw new RuntimeException("Insufficient stock for product: " + productName);
-            }
-            product.setQuantity(newQuantity);
-            productRepository.save(product);
-            */
+            // Update the product's quantity in the database
+            KokaProcess.updateProductQuantity(selectProduct, newQuantity);
 
             // Complete the job
             client.newCompleteCommand(job.getKey()).send().join();
@@ -93,22 +83,61 @@ public class Workers {
         try {
             // Extract variables from the job
             Map<String, Object> variables = job.getVariablesAsMap();
-            // just like verify payment we need all info to put inside the json'
-
-
+    
+            // Extract datetime from the API response and format it
+            if (variables.containsKey("datetime")) {
+                try {
+                    @SuppressWarnings("unchecked")
+                    Map<String, Object> datetimeMap = (Map<String, Object>) variables.get("datetime");
+                    if (datetimeMap != null && datetimeMap.containsKey("body")) {
+                        @SuppressWarnings("unchecked")
+                        Map<String, Object> body = (Map<String, Object>) datetimeMap.get("body");
+                        if (body != null && body.containsKey("datetime")) {
+                            String datetime = (String) body.get("datetime");
+                            System.out.println("Extracted datetime: " + datetime); // Debug log
+                            String formattedDateTime = KokaProcess.formatDateTime(datetime);
+    
+                            // Store formatted datetime in variables map under a new key
+                            variables.put("datetimemail", formattedDateTime);
+                        } else {
+                            throw new IllegalArgumentException("Missing 'datetime' key in body.");
+                        }
+                    } else {
+                        throw new IllegalArgumentException("Missing 'body' key in datetimeMap.");
+                    }
+                } catch (ClassCastException e) {
+                    throw new IllegalArgumentException("Invalid structure for 'datetime' or 'body' in variables.", e);
+                }
+            } else {
+                throw new IllegalArgumentException("'datetime' key not found in variables.");
+            }
+    
+            // Remove datetime key from variables map
+            variables.remove("datetime");
+    
+            // Create JSON file from variables
+            KokaProcess.createJsonFile(variables);
+    
             // Complete the job with the updated variables
             client.newCompleteCommand(job.getKey())
                     .variables(variables)
                     .send()
                     .join();
         } catch (Exception e) {
+            // Log error details for debugging
+            System.err.println("Failed to handle job with key " + job.getKey() + ": " + e.getMessage());
+    
             // Handle failure
-            client.newFailCommand(job.getKey())
-                    .retries(job.getRetries() - 1)
-                    .errorMessage(e.getMessage())
-                    .send()
-                    .join();
+            try {
+                client.newFailCommand(job.getKey())
+                        .retries(job.getRetries() - 1)
+                        .errorMessage(e.getMessage())
+                        .send()
+                        .join();
+            } catch (Exception failException) {
+                System.err.println("Failed to send fail command for job with key " + job.getKey() + ": "
+                        + failException.getMessage());
+            }
         }
     }
 }
-
