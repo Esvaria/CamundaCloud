@@ -21,4 +21,11 @@ public class OrderInformation {
         productMap.put(3, "secretLabChair");
         return productMap;
     }
+
+    public enum OrderStatus {
+        PENDING,
+        COMPLETED,
+        VALIDATED,
+        CANCELLED
+    }
 }

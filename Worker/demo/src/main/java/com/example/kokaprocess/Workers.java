@@ -6,6 +6,8 @@ import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.kokaprocess.OrderInformation.OrderStatus;
+
 import java.util.Map;
 
 @SpringBootApplication
@@ -20,6 +22,10 @@ public class Workers {
         try {
             // Extract variables from the job
             Map<String, Object> variables = job.getVariablesAsMap();
+            // Set default order status to PENDING if not already set
+            if (!variables.containsKey("orderStatus")) {
+                variables.put("orderStatus", OrderStatus.PENDING.name());
+            }
             String cardholderName = (String) variables.get("cardholderName");
             String cardNumber = (String) variables.get("cardNumber");
             String expiryDate = (String) variables.get("expiryDate");
@@ -28,7 +34,10 @@ public class Workers {
             boolean isValid = KokaProcess.getPaymentInformation(cardholderName, cardNumber, expiryDate);
             variables.put("isPaymentValid", isValid);
 
-            if (!isValid) {
+            if (isValid) {
+                variables.put("orderStatus", OrderStatus.VALIDATED.name());
+            } else {
+                variables.put("orderStatus", OrderStatus.CANCELLED.name());
                 System.out.println("Payment information is invalid for job: " + job.getKey());
             }
 
@@ -83,7 +92,7 @@ public class Workers {
         try {
             // Extract variables from the job
             Map<String, Object> variables = job.getVariablesAsMap();
-    
+
             // Extract datetime from the API response and format it
             if (variables.containsKey("datetime")) {
                 try {
@@ -96,7 +105,7 @@ public class Workers {
                             String datetime = (String) body.get("datetime");
                             System.out.println("Extracted datetime: " + datetime); // Debug log
                             String formattedDateTime = KokaProcess.formatDateTime(datetime);
-    
+
                             // Store formatted datetime in variables map under a new key
                             variables.put("datetimemail", formattedDateTime);
                         } else {
@@ -111,13 +120,16 @@ public class Workers {
             } else {
                 throw new IllegalArgumentException("'datetime' key not found in variables.");
             }
-    
+
             // Remove datetime key from variables map
             variables.remove("datetime");
-    
+
             // Create JSON file from variables
             KokaProcess.createJsonFile(variables);
-    
+
+            // pass order status to completed
+            variables.put("orderStatus", OrderStatus.COMPLETED.name());
+
             // Complete the job with the updated variables
             client.newCompleteCommand(job.getKey())
                     .variables(variables)
@@ -126,7 +138,7 @@ public class Workers {
         } catch (Exception e) {
             // Log error details for debugging
             System.err.println("Failed to handle job with key " + job.getKey() + ": " + e.getMessage());
-    
+
             // Handle failure
             try {
                 client.newFailCommand(job.getKey())

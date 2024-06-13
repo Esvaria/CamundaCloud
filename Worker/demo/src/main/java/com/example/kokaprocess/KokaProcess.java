@@ -31,10 +31,12 @@ import java.nio.file.Files;
 public class KokaProcess {
 
     private static String apiKey;
+
     @Value("${api-ninjas.key}")
     public void setApiKey(String key) {
         apiKey = key;
     }
+
     public KokaProcess() {
     }
 
@@ -53,6 +55,7 @@ public class KokaProcess {
         }
         return true;
     }
+
     public static void createDatabase() {
         String relativePath = "CamundaCloud/Worker/demo/src/main/resources/db.sqlite";
         File dbFile = new File(relativePath);
@@ -68,7 +71,7 @@ public class KokaProcess {
                 String url = "jdbc:sqlite:" + relativePath;
 
                 try (Connection conn = DriverManager.getConnection(url);
-                     Statement stmt = conn.createStatement()) {
+                        Statement stmt = conn.createStatement()) {
 
                     String createTableSQL = "CREATE TABLE IF NOT EXISTS products (\n"
                             + "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
@@ -105,12 +108,13 @@ public class KokaProcess {
             System.out.println("Database already exists.");
         }
     }
+
     // Method to fetch current quantity of a product from database
     public static int getProductQuantity(String productName) throws SQLException {
         String url = "jdbc:sqlite:CamundaCloud/Worker/demo/src/main/resources/db.sqlite";
         String selectSQL = "SELECT quantity FROM products WHERE name = ?";
         try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
+                PreparedStatement pstmt = conn.prepareStatement(selectSQL)) {
             pstmt.setString(1, productName);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -120,6 +124,7 @@ public class KokaProcess {
             }
         }
     }
+
     // Method to create JSON file from variables and return file name
     public static void createJsonFile(Map<String, Object> variables) throws IOException {
         // Create directory if it doesn't exist
@@ -148,6 +153,7 @@ public class KokaProcess {
             }
         }
     }
+
     // Method to format datetime from API response
     public static String formatDateTime(String datetime) {
         try {
@@ -169,7 +175,7 @@ public class KokaProcess {
         String url = "jdbc:sqlite:CamundaCloud/Worker/demo/src/main/resources/db.sqlite";
         String updateSQL = "UPDATE products SET quantity = ? WHERE name = ?";
         try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
+                PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
             pstmt.setInt(1, newQuantity);
             pstmt.setString(2, productName);
             pstmt.executeUpdate();
